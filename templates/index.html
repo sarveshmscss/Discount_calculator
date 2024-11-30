@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discount Calculator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Discount Calculator</h1>
+        <form method="POST">
+            <label for="price">Price per Unit:</label>
+            <input type="number" step="0.01" id="price" name="price" required>
+
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity" name="quantity" required>
+
+            <label for="discount">Discount Percentage (%):</label>
+            <input type="number" step="0.01" id="discount" name="discount" required>
+
+            <button type="submit">Calculate</button>
+        </form>
+
+        {% if result %}
+        <div class="result">
+            {% if result.error %}
+                <p class="error">{{ result.error }}</p>
+            {% else %}
+                <p>Total Price: ₹{{ result.total }}</p>
+                <p>Discount Amount: ₹{{ result.discount_amount }}</p>
+                <p><strong>Final Bill Amount: ₹{{ result.final_amount }}</strong></p>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
